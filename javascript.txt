@@ -161,42 +161,181 @@ const greet = new Function("name", return `Hello, ${name}!`;");
 12. What is a higher-order function?
 A higher-order function is a function that treats other functions as data, either by taking them as arguments or returning them.
 
+// Higher-order function that takes a function as an argument
+function operate(x, y, operation){
+    return operation(x, y); // calls the passed function with x and y
+}
 
-27:28 Explain the concept of function hoisting.
-28:54 What is a pure function?
-29:56 What is the difference between function declaration and function expression?
-32:04 What is an Immediately Invoked Function Expression (IIFE)?
-33:05 How do you create an object in JavaScript?
-34:11 How do you add/remove properties to an object dynamically?
-36:27 How do you check if a property exists in an object?
-37:55 What is the purpose of the this keyword in JavaScript?
-40:49 What are the different ways to loop through an array in JavaScript?
-43:25 Explain the difference between for...in and for...of loops.
-45:00 How do you add/remove elements from an array?
-46:32 What is the purpose of the map() function?
-48:23 Explain the difference between filter() and find() methods.
-50:07 Explain the difference between some() and every() method.
-52:44 How do you select elements in the DOM using JavaScript?
-55:04 How do you create and append elements to the DOM?
-56:54 Explain the difference between innerHTML and textContent.
-59:07 How do you remove an element from the DOM?
-01:00:37 What are arrow functions and how do they differ from regular functions?
-01:02:32 Explain the concept of destructuring in JavaScript.
-01:04:00 What are template literals?
-01:06:23 How do you use the spread operator?
-01:08:23 What are default parameters in ES6?
-01:09:56 How do you use the rest parameter in functions?
-01:12:01 What is callback & callback hell explain with example
-01:13:59 What is a Promise in JavaScript with example?
-01:16:25 How do you chain Promises?
-01:18:19 What is the purpose of the Promise.all() method?
-01:19:28 What is the purpose of the finally() method in Promises?
-01:21:21 What is the purpose of the async await ?
-01:23:25 How do you handle errors in async/await?
-01:24:55 What is the difference between async/await and Promises?
-01:25:39 What is the difference between default and named exports?
-01:26:35 How do you convert a JavaScript object to a JSON string ?
-01:28:35 How do you parse a JSON string back into a JavaScript object?
-01:29:56 What is localStorage in JavaScript, and how do you store and retrieve data from it?
-01:30:13 What is the difference between localStorage and sessionStorage?
-01:31:35 How do you delete a specific item from localStorage or clear all data from it?
+// function to be passed as arguments
+const add = (a, b) => a + b; // arrow function for addition
+const multiply = (a, b) => a * b; // arrow function for multiplication
+
+//using higher order function
+console.log(operate(5, 3, add)); // 8
+console.log(operate(5,3, multiply)); // 15
+
+13. Explain the concept of function hoisting?
+Function hoisting is JavaScript's behavior of moving function declarations to the top of their scope during the compilation phase. 
+This allows you to call a function before it appears to be defined in the code.
+
+//this works due to hoisting
+sayHello(); //output : "hello"
+
+//function declaration is hoisted to the top of its scope
+function sayHello(){
+    console.log("hello!");
+}
+
+//note: function expressions are not hoisted
+// hello(); // this would cause an error  --> ReferenceError: Cannot access 'hello' before initialization
+// const hello = function(){console.log("hello");};
+
+14. What is a pure function?
+A pure function is a function that: Always returns the same output for the same inputs. 
+Has no side effects (doesn't modify external state). Doesn't rely on external state. Make code more predictable and easier to test.
+
+//pure function: always returns the same
+//output for the same inputs
+function add(a, b){
+    return a + b; //deterministic and no side effects
+}
+
+// Impure function: modifies external state
+let total = 0;
+function addToTotal(value){
+    total+= value; //modifies external variable 'total'
+    return total;
+}
+
+15. What is the difference between function declaration and function expression?
+Hoisting: Function declarations are hoisted, function expressions are not. 
+
+Usage: Function declarations can be called before they appear in the code, function expressions cannot.
+
+Naming: Function declarations require a name, function expressions can be anonymous.
+
+// function declaration: hoisted and can be called before definition
+sayHello(); // works due to hoisting
+function sayHello(){
+    console.log("hello");
+}
+
+// function expression: not hoisted, must be defined before use
+// greet(); // error
+const greet = function() {
+    console.log("greetings");
+};
+greet(); // works when called after the expression.
+
+
+16. What is an Immediately Invoked Function Expression (IIFE)?
+An IIFE is a JavaScript function that runs as soon as it is defined.
+// IIFE syntax
+
+
+17 How do you create an object in JavaScript?
+18 How do you add/remove properties to an object dynamically?
+19 How do you check if a property exists in an object?
+20 What is the purpose of the this keyword in JavaScript?
+The `this` keyword refers to the object that is executing the current function. Its value is determined by how a function is called.
+
+21 What are the different ways to loop through an array in JavaScript?
+1. for loop
+2. for...in
+3. for...of
+
+22 Explain the difference between for...in and for...of loops.
+
+
+23 How do you add/remove elements from an array?
+
+24 What is the purpose of the map() function?
+The map() method creates a new array with the results of calling a provided function on every element in the array.
+
+25 Explain the difference between filter() and find() methods.
+
+26 Explain the difference between some() and every() method.
+some() method: Returns true if at least one element in the array satisfies the provided testing function. Stops iterating as soon as it finds an element that satisfies the condition. Returns false if no elements satisfy the condition.
+every() method: Returns true if all elements in the array satisfy the provided testing function. Stops iterating as soon as it finds an element that doesn't satisfy the
+condition.
+
+27 How do you select elements in the DOM using JavaScript?
+
+28 How do you create and append elements to the DOM?
+
+29 Explain the difference between innerHTML and textContent.
+Key differences:
+innerHTML parses content as HTML, textContent does not
+innerHTML can be slower and less secure (risk of XSS attacks)
+textContent is generally faster and safer
+innerHTML returns all content, including script and style element content
+textContent returns the text content of all elements, ignoring tags
+
+30 How do you remove an element from the DOM?
+
+31 What are arrow functions and how do they differ from regular functions?
+
+32 Explain the concept of destructuring in JavaScript.
+Destructuring is a way to extract multiple values from data stored in objects and arrays.
+
+33 What are template literals?
+Template literals are string literals that allow embedded expressions and multi-line strings.
+
+34 How do you use the spread operator?
+The spread operator (...) allows an iterable to be expanded in places where zero or more arguments or elements are expected.
+
+35 What are default parameters in ES6?
+Default parameters allow you to set default values for function parameters if no value or undefined is passed.
+
+36 How do you use the rest parameter in functions?
+The rest parameter syntax allows a function to accept an indefinite number of arguments as an array.
+
+37 What is callback & callback hell explain with example
+Callbacks are functions passed as arguments to other functions, often used for asynchronous operations. 
+Callback hell occurs when multiple nested callbacks make code hard to read and maintain.
+
+38 What is a Promise in JavaScript with example?
+A Promise is an object representing the eventual completion or failure of an asynchronous operation.
+
+39 How do you chain Promises?
+Promise chaining allows you to perform sequential asynchronous operations.
+
+40 What is the purpose of the Promise.all() method?
+Promise.all() takes an iterable of promises and returns a single Promise that resolves when all input promises have resolved, or rejects if any input promise rejects.
+
+41 What is the purpose of the finally() method in Promises?
+The finally() method is used to specify code that should be executed regardless of whether the promise is fulfilled or rejected.
+
+42 What is the purpose of the async await ?
+The purpose of async/await is to simplify the syntax for working with Promises, making asynchronous code easier to write and read. 
+It allows you to write asynchronous code that looks and behaves more like synchronous code.
+
+43 How do you handle errors in async/await?
+
+44 What is the difference between async/await and Promises?
+Syntax: Async/await provides a more linear, synchronous- looking code structure.
+Error handling: Async/await uses try/catch, which is more familiar for synchronous code.
+Chaining: Promises use .then() for chaining, while async/await uses regular JavaScript control flow.
+Debugging: Async/await can be easier to debug as it behaves more like synchronous code
+
+
+45 What is the difference between default and named exports?
+A module can have multiple named exports but only one default export.
+Named exports are imported using curly braces, while default exports are imported without them.
+Default exports can be imported with any name, while named exports must be imported with their exact names (unless renamed using `as`).
+
+
+46 How do you convert a JavaScript object to a JSON string ?
+
+
+47 How do you parse a JSON string back into a JavaScript object?
+
+48 What is localStorage in JavaScript, and how do you store and retrieve data from it?
+localStorage is a web storage object that allows you to store key-value pairs in the browser with no expiration time
+
+49 What is the difference between localStorage and sessionStorage?
+Both localStorage and sessionStorage are web storage objects, but they differ in data persistence.
+localStorage data persists even after the browser is closed and reopened. sessionStorage data is cleared when the page session ends (i.e., when the tab is closed).
+Both have the same API and are limited to storing string data.
+
+50 How do you delete a specific item from localStorage or clear all data from it?
