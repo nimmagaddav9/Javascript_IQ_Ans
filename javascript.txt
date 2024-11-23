@@ -1,0 +1,202 @@
+JavaScript Interview Questions and Answers
+========================================================
+
+1. What are the data types in JavaScript?
+JavaScript has eight data types, divided into two categories: primitive and non-primitive (object).
+
+let number = 100;
+let string = "hi";
+let boolean = true;
+let undefinedValue;
+let nullValue = null;
+let symbol = Symbol("unique");
+let bigInt = 123455655555n;
+let object = {name: "vijay", age: 21}
+
+
+2. What is the difference between == and ===?
+The == (equality) and === (strict equality) operators are used for comparison in JavaScript.
+== (Equality): Performs type coercion before comparison and then it compares values after converting them to a common type.
+=== (Strict Equality): Does not perform type coercion and it compares both value and type.
+
+example:
+console.log(5 == '5'); //true (compares string to number)
+console.log(5==='5'); // false (different types)
+
+3. What is the difference between null and undefined?
+Null and undefined are both used to represent the absence of a value.
+Null: Must be explicitly assigned. Typeof null returns "object" (this is a known JavaScript bug)
+Undefined: Represents a variable that has been declared but not assigned a value .Typeof undefined returns "undefined"
+
+let nullVar = null;
+console.log(nullVar); //null
+console.log(typeOf null); //"object"
+
+let undefinedVar;
+console.log(undefinedVar); //undefined
+console.log(typeOf undefined); //"undefined"
+
+4. Explain the concept of hoisting in JavaScript.
+Hoisting is a behavior in JavaScript where variable and function declarations are moved to the top of their respective scopes during the compilation phase, before the code is executed. 
+This means that regardless of where variables and functions are declared in the code, they are treated as if they are declared at the beginning of their scope.
+
+example:
+console.log(x); //output: undefined
+var x = 5;
+console.log(x); //output: 5
+
+the declaration of x is hoisted to the top, but not its initialization. That's why the first `console.log outputs undefined.
+
+let and const declarations are hoisted but not initialized. This leads to a "temporal dead zone" where accessing the variable before its declaration results in a ReferenceError.
+
+console.log(y);
+// throws ReferenceError: Cannot access 'y' before "initialization"
+let y = 10;
+
+
+
+5. What is the difference between let, const, and var?
+
+var: Function-scoped or globally-scoped. Can be redeclared and updated and Hoisted and initialized with undefined.
+
+let: Block-scoped. Hoisted but not initialized (Temporal Dead Zone).
+
+const: Block-scoped. Cannot be updated or redeclared. Hoisted but not initialized (Temporal Dead Zone)
+
+const a = 10;
+a=20; // can't do this
+
+
+6. What is variable scope in JavaScript?
+Variable scope refers to the context in which a variable is declared and can be accessed. In JavaScript, there are two main types of scope:
+Global Scope: Variables declared outside any function or block
+Local Scope: Variables declared inside a function or block
+JavaScript uses lexical scoping, which means that inner functions have access to variables in their outer scope.
+
+let globalVar = "global";
+
+function exampleFuntion(){
+    let localVar = "local";
+
+    console.log(globalVar); // "global"
+    console.log(localVar); // "local"
+}
+
+exampleFuntion();
+console.log(globalVar); // global
+console.log(localVar);  // ReferenceError: localVar is not defined
+
+
+7. Explain the difference between global and local variables.
+Global Variables: Declared outside any function or block. Accessible from anywhere in the code, including inside functions. Have global scope
+Local Variables: Declared inside a function or block. Only accessible within that function or block. Have local scope
+
+
+
+8. What is the temporal dead zone?
+The Temporal Dead Zone (TDZ) is the period between entering a scope and the point where a variable is declared and initialized.
+
+Applies to variables declared with let and const.
+Helps catch errors by preventing access to variables before they're declared
+
+console.log(x);
+let x = 5; // ReferenceError: Cannot access 'x' before initialization
+
+
+9. What is variable shadowing?
+Variable shadowing occurs when a variable declared in a certain scope has the same name as a variable in an outer scope. 
+The inner variable "shadows" the outer one, effectively hiding it.
+
+let x = 10;
+
+function exampleFuntion(){
+    let x = 20; // this x shadows the outer x
+    console.log(x); // 20
+    if(true){
+        let x = 30; // this x shadows both outer x variables
+        console.log(x); // 30
+    }
+    console.log(x); // 20
+}
+exampleFunction();
+console.log(x); // 10
+
+10. What is a closure in JavaScript?
+if any inner function holding the outer function data, then such scenario called as closure.
+
+<script>
+    function fun_one(){
+        var x = 10;
+        var y = 20;
+        return ()=>{
+            console.log(x);
+            console.log(y);
+        }
+    };
+    console.dir( fun_one() );  //0: Closure (fun_one) {x: 10, y: 20}
+  
+</script>
+
+
+11. What are the different ways to define a function in JavaScript?
+
+// Function declaration: hoisted and can be called before it's defined.
+function great(name){
+    return `hello, ${name}!`;
+}
+
+// Function expression: assigned to a variable, not hoisted
+const greet = function(name){
+    return `hello, ${name}!`;
+};
+
+
+//arrow function: shorter syntax, lexically binds 'this'
+const greet = (name) => `hello, $ {name}!`;
+
+//function constructor: creates a function dynamically
+const greet = new Function("name", return `Hello, ${name}!`;");
+
+
+12. What is a higher-order function?
+A higher-order function is a function that treats other functions as data, either by taking them as arguments or returning them.
+
+
+27:28 Explain the concept of function hoisting.
+28:54 What is a pure function?
+29:56 What is the difference between function declaration and function expression?
+32:04 What is an Immediately Invoked Function Expression (IIFE)?
+33:05 How do you create an object in JavaScript?
+34:11 How do you add/remove properties to an object dynamically?
+36:27 How do you check if a property exists in an object?
+37:55 What is the purpose of the this keyword in JavaScript?
+40:49 What are the different ways to loop through an array in JavaScript?
+43:25 Explain the difference between for...in and for...of loops.
+45:00 How do you add/remove elements from an array?
+46:32 What is the purpose of the map() function?
+48:23 Explain the difference between filter() and find() methods.
+50:07 Explain the difference between some() and every() method.
+52:44 How do you select elements in the DOM using JavaScript?
+55:04 How do you create and append elements to the DOM?
+56:54 Explain the difference between innerHTML and textContent.
+59:07 How do you remove an element from the DOM?
+01:00:37 What are arrow functions and how do they differ from regular functions?
+01:02:32 Explain the concept of destructuring in JavaScript.
+01:04:00 What are template literals?
+01:06:23 How do you use the spread operator?
+01:08:23 What are default parameters in ES6?
+01:09:56 How do you use the rest parameter in functions?
+01:12:01 What is callback & callback hell explain with example
+01:13:59 What is a Promise in JavaScript with example?
+01:16:25 How do you chain Promises?
+01:18:19 What is the purpose of the Promise.all() method?
+01:19:28 What is the purpose of the finally() method in Promises?
+01:21:21 What is the purpose of the async await ?
+01:23:25 How do you handle errors in async/await?
+01:24:55 What is the difference between async/await and Promises?
+01:25:39 What is the difference between default and named exports?
+01:26:35 How do you convert a JavaScript object to a JSON string ?
+01:28:35 How do you parse a JSON string back into a JavaScript object?
+01:29:56 What is localStorage in JavaScript, and how do you store and retrieve data from it?
+01:30:13 What is the difference between localStorage and sessionStorage?
+01:31:35 How do you delete a specific item from localStorage or clear all data from it?
